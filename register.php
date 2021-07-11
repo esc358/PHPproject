@@ -6,30 +6,53 @@ $conn = db_connect();
 
 require_once 'validations.php';
 
+
+
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     // GET THE FORM INPUTS
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
     $new_password = filter_var($_POST['new-password'], FILTER_SANITIZE_STRING);
     $confirm_password = filter_var($_POST['confirm-password'], FILTER_SANITIZE_STRING);
 
-    $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
+    //create an associative array on the form
+    $user = [];
+    $user['email'] = $email;
+    $user['new-password'] = $new_password;
+    $user['confirm-password'] = $confirm_password;
 
-    //SET UP SQL EXECUTE INSERT
-    $sql = "INSERT INTO users_dota (username, hashed_password) "; 
-    $sql .= "VALUES (:username, :password)";
 
-    $cmd = $conn -> prepare($sql);
-    $cmd -> bindParam(':username', $email, PDO::PARAM_STR, 50);
-    $cmd -> bindParam(':password', $hashed_password, PDO::PARAM_STR, 255);
-    $cmd -> execute();
+    
+    //validate inputs   
+    $errors = validate_registration($user, $conn);
+  
 
-    //disconect
-    $conn = null;
+    //if there are no erros, hash password
+    if(empty($errors)){
+        $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
 
-    //redirect to login page
-    header("Location: login.php");
-    exit;
+        //SET UP SQL EXECUTE INSERT
+        $sql = "INSERT INTO users_dota (username, hashed_password) "; 
+        $sql .= "VALUES (:username, :password)";
+
+        $cmd = $conn -> prepare($sql);
+        $cmd -> bindParam(':username', $email, PDO::PARAM_STR, 50);
+        $cmd -> bindParam(':password', $hashed_password, PDO::PARAM_STR, 255);
+        $cmd -> execute();
+
+        //disconect
+        $conn = null;
+
+        //redirect to login page
+        header("Location: login.php");
+        exit;
+    }
+} else if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    $errors=[];
 }
+
+
+
+
 ?>
 
 
@@ -61,21 +84,21 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             <div class="row justify-content-center">
                 <form class="p-5" method="POST" >
                     <div class="form-floating mb-4">
-                        <input type="email" required name="email" class="rounded-0 form-control" id="email" placeholder="name@example.com">
+                        <input type="email" required name="email" class="<?= (isset($errors['email']) ? 'is-invalid' : '' ) ?> rounded-0 form-control" id="email" placeholder="name@example.com" value="<?= $email ?? ''; ?>">
                         <label for="email">Email Address</label>
-                        <p class="text-danger">Uphs!</p>
+                        <p class="text-danger"><?= $errors['email'] ?? ''; ?></p>
                     </div>
 
                     <div class="form-floating mb-4">
-                        <input type="password" required name="new-password" class="rounded-0 form-control" id="new-password" placeholder="Password">
+                        <input type="password" required name="new-password" class="<?= (isset($errors['password']) ? 'is-invalid' : '' ) ?> rounded-0 form-control" id="new-password" placeholder="Password" value="<?= $new_password ?? ''; ?>">
                         <label for="new-password">New Password</label>
-                        <p class="text-danger">Uphs!</p>
+                        <p class="text-danger"><?= $errors['password'] ?? ''; ?></p>
                     </div>
 
                     <div class="form-floating mb-4">
-                        <input type="password" required name="confirm-password" class="rounded-0 form-control" id="confirm-password" placeholder="Confirm Password">
+                        <input type="password" required name="confirm-password" class="<?= (isset($errors['confirm']) ? 'is-invalid' : '' ) ?> rounded-0 form-control" id="confirm-password" placeholder="Confirm Password" value="<?= $confirm_password ?? ''; ?>">
                         <label for="confirm-password">Confirm Password</label>
-                        <p class="text-danger">Uphs!</p>
+                        <p class="text-danger"><?= $errors['confirm'] ?? ''; ?></p>
                     </div>
 
                     <div class="d-grid">
