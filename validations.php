@@ -28,6 +28,5 @@ function validate_registration($user, $conn){
         if($found_username){
             $errors['email'] = 'Username already taken';
         }
-   
     return $errors;
 }
