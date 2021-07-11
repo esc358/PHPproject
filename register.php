@@ -29,3 +29,45 @@ require_once 'validations.php';
     </style>
     
 </head>
+<body>
+
+    <div class="container">
+        <div class="card position-absolute top-50 start-50 translate-middle" style="width: 700 px;">
+            <h1 class="card-title fs-5 mt-4 text-center">CREATE ACCOUNT</h1>
+
+            <div class="row justify-content-center">
+                <form class="p-5" method="POST" >
+                    <div class="form-floating mb-4">
+                        <input type="email" required name="email" class="rounded-0 form-control" id="email" placeholder="name@example.com">
+                        <label for="email">Email Address</label>
+                        <p class="text-danger">Uphs!</p>
+                    </div>
+
+                    <div class="form-floating mb-4">
+                        <input type="password" required name="new-password" class="rounded-0 form-control" id="new-password" placeholder="Password">
+                        <label for="new-password">New Password</label>
+                        <p class="text-danger"></p>
+                    </div>
+
+                    <div class="form-floating mb-4">
+                        <input type="password" required name="confirm-password" class="rounded-0 form-control" id="confirm-password" placeholder="Confirm Password">
+                        <label for="confirm-password">Confirm Password</label>
+                        <p class="text-danger"></p>
+                    </div>
+
+                    <div class="d-grid">
+                        <button class="btn btn-success btn-lg mb-5">
+                            Sign Up
+                        </button>
+                    </div>
+                </form>
+                <p class="text-center">Already have an account? <a href="login.php" class="text-dark"><strong>Login Here</strong></a></p>
+            </div>
+        </div>
+    
+    </div>
+    
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
