@@ -6,7 +6,30 @@ $conn = db_connect();
 
 require_once 'validations.php';
 
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    // GET THE FORM INPUTS
+    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+    $new_password = filter_var($_POST['new-password'], FILTER_SANITIZE_STRING);
+    $confirm_password = filter_var($_POST['confirm-password'], FILTER_SANITIZE_STRING);
 
+    $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
+
+    //SET UP SQL EXECUTE INSERT
+    $sql = "INSERT INTO users_dota (username, hashed_password) "; 
+    $sql .= "VALUES (:username, :password)";
+
+    $cmd = $conn -> prepare($sql);
+    $cmd -> bindParam(':username', $email, PDO::PARAM_STR, 50);
+    $cmd -> bindParam(':password', $hashed_password, PDO::PARAM_STR, 255);
+    $cmd -> execute();
+
+    //disconect
+    $conn = null;
+
+    //redirect to login page
+    header("Location: login.php");
+    exit;
+}
 ?>
 
 
@@ -46,13 +69,13 @@ require_once 'validations.php';
                     <div class="form-floating mb-4">
                         <input type="password" required name="new-password" class="rounded-0 form-control" id="new-password" placeholder="Password">
                         <label for="new-password">New Password</label>
-                        <p class="text-danger"></p>
+                        <p class="text-danger">Uphs!</p>
                     </div>
 
                     <div class="form-floating mb-4">
                         <input type="password" required name="confirm-password" class="rounded-0 form-control" id="confirm-password" placeholder="Confirm Password">
                         <label for="confirm-password">Confirm Password</label>
-                        <p class="text-danger"></p>
+                        <p class="text-danger">Uphs!</p>
                     </div>
 
                     <div class="d-grid">
