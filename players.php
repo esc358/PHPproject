@@ -1,13 +1,13 @@
 <?php
+session_start();
+
+require_once 'validations.php';
+
 //connect to db
 require_once 'database-dota.php';
 $conn = db_connect();
-?>
 
-
-<?php
 include_once 'sharedmy/top.php';
-
 
 //build a sql query
 $sql = "SELECT * FROM dota";
@@ -21,8 +21,10 @@ $players = db_queryAll($sql, $conn);
             <th scope="col">Level</th>
             <th scope="col">Ability</th>
             <th scope="col">Comments</th>
-            <th scope="col" class="col-1">Edit</th>
-            <th scope="col" class="col-1">Delete</th>
+            <?php if (is_logged_in()) { ?>
+                <th scope="col" class="col-1">Edit</th>
+                <th scope="col" class="col-1">Delete</th>
+            <?php } ?>
         </tr>
     </thead>
     <tbody>
@@ -33,9 +35,11 @@ $players = db_queryAll($sql, $conn);
             <td><?php echo $player['level']; ?></td>
             <td><?php echo $player['ability']; ?></td>
             <td><?php echo $player['comments'];?></td>
-            <td><a href="dota-edit.php?dota_id=<?php echo $player['dota_id']; ?>" class="btn btn-secondary">Edit <i
-                        class="bi bi-pencil-square"></i></a></td>
-            <td><a href="dota-delete.php?dota_id=<?php echo $player['dota_id']; ?>" class="btn btn-warning">Delete <i class="bi bi-trash"></i></a></td>
+            <?php if (is_logged_in()) { ?>
+                <td><a href="dota-edit.php?dota_id=<?php echo $player['dota_id']; ?>" class="btn btn-secondary">Edit <i
+                            class="bi bi-pencil-square"></i></a></td>
+                <td><a href="dota-delete.php?dota_id=<?php echo $player['dota_id']; ?>" class="btn btn-warning">Delete <i class="bi bi-trash"></i></a></td>
+            <?php } ?>
         </tr>
         <?php } ?>
 

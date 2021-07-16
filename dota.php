@@ -1,4 +1,12 @@
 <?php
+
+//start session
+session_start();
+
+require_once 'validations.php';
+
+require_login();
+
 //connect to db
 require_once 'database-dota.php';
 $conn = db_connect();

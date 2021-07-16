@@ -49,12 +49,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 } else if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $errors=[];
 }
-
-
-
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
