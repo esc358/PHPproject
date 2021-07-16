@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Header</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
@@ -32,18 +32,29 @@
                                 <a class="nav-link active" aria-current="page" href="main.php">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="games.php">Listing</a>
+                                <a class="nav-link" href="games.php">Players</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="game.php">Add Game</a>
-                            </li>
-
+                            <?php if (is_logged_in()) { ?>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="game.php">Add Game</a>
+                                </li>
+                            <?php } ?>
                         </ul>
                         <ul class="navbar-nav d-flex">
-                            <li class="nav-item">
-                                <button class="btn btn-danger btn-lg">Logout <i
-                                        class="bi bi-box-arrow-right"></i></button>
-                            </li>
+                            <?php if (is_logged_in()) { ?>
+                                <li class="nav-item">
+                                    <button class="btn btn-danger btn-lg">Logout <i
+                                            class="bi bi-box-arrow-right"></i></button>
+                                </li>
+                            <?php } else { ?>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="login.php">Login</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="register.php">Register</a>
+                                </li>
+                            <?php } ?>
                         </ul>
                     </div>
                 </div>
