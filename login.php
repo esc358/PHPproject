@@ -1,3 +1,43 @@
+<?php
+
+session_start();
+//connect to db
+require_once 'database-dota.php';
+$conn = db_connect();
+
+//if user tries to submit their login
+
+if($_SERVER['REQUEST_METHOD'] == 'POST')
+{
+    // grab their username, password
+    $username = filter_var($_POST['email'], FILTER_SANITIZE_STRING);
+    $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
+
+    // query db for username
+    $sql = "SELECT * FROM users_dota WHERE username=:username";
+    $cmd = $conn -> prepare($sql);
+    $cmd -> bindParam(":username", $username, PDO::PARAM_STR, 50);
+    $cmd -> execute();
+    $found_user = $cmd -> fetch();
+
+    // if found, compare passwords
+    if (password_verify($password, $found_user['hashed_password']))
+    {
+        session_regenerate_id();
+        $_SESSION['user_id'] = $found_user['user_id'];
+        $_SESSION['last_login'] = time();
+        $_SESSION['username'] = $found_user['username'];
+        header("Location: main-dota.php");
+        exit;
+    } else
+    {
+        header("Location:login.php?invalid=true");
+        exit;
+    }
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,9 +79,9 @@
                             </div>
                         </div>
                     </form>
-                    
+                    <?php if($_GET['invalid'] ?? false) { ?>
                     <p class="text-danger"><strong>Invalid Username or Password</strong></p>
-                   
+                    <?php } ?>
                 </div>
 
             </div>
