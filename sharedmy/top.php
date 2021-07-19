@@ -34,7 +34,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="players.php">Players</a>
                             </li>
-                            <?php if (is_logged_in()) { ?> ////checks whether variable is set/declared
+                            <?php if (is_logged_in()) { //checks whether variable is set/declared ?> 
                                 <li class="nav-item">
                                     <a class="nav-link" href="dota.php">Add Game</a>
                                 </li>
