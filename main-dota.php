@@ -1,8 +1,8 @@
 <?php
 //start session
-session_start();
+session_start(); // is a way to make the data available across various pages of a web application
 
-require_once 'validations.php';
+require_once 'validations.php'; //used to embed PHP code from another file
 
 require_login();
 

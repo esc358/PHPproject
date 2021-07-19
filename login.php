@@ -21,11 +21,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
     $found_user = $cmd -> fetch();
 
     // if found, compare passwords
+    //Verifies that the given hash matches the given password.
     if (password_verify($password, $found_user['hashed_password']))
     {
-        session_regenerate_id();
-        $_SESSION['user_id'] = $found_user['user_id'];
-        $_SESSION['last_login'] = time();
+        session_regenerate_id();//generates a new session id and updates the current one with the newly created one.
+        $_SESSION['user_id'] = $found_user['user_id'];//An associative array containing session variables
+        $_SESSION['last_login'] = time(); //gives you all the information that you need about the current date and time
         $_SESSION['username'] = $found_user['username'];
         header("Location: main-dota.php");
         exit;

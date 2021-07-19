@@ -2,12 +2,12 @@
 
 function is_logged_in()
 {
-    return isset($_SESSION['user_id']);
+    return isset($_SESSION['user_id']); //checks whether variable is set/declared
 }
 
 function require_login()
 {
-    if(!is_logged_in())
+    if(!is_logged_in()) //not logged in therefore redirect to login php
     {
         header("Location:login.php");
         exit;
