@@ -9,7 +9,7 @@ require_login();
 //connect to db
 require_once 'database-dota.php';
 $conn = db_connect();
-
+$title_tag = "Error";
 include_once 'sharedmy/top.php';
 
 ?>

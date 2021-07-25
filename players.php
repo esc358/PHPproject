@@ -7,6 +7,7 @@ require_once 'validations.php';
 require_once 'database-dota.php';
 $conn = db_connect();
 
+$title_tag = "List Players";
 include_once 'sharedmy/top.php';
 
 //build a sql query
