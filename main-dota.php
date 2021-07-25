@@ -9,11 +9,8 @@ require_login();
 //connect to db
 require_once 'database-dota.php';
 $conn = db_connect();
-?>
 
-
-<?php
-
+$title_tag = "Home";
 include_once 'sharedmy/top.php';
 
 ?>

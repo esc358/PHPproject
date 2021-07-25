@@ -10,6 +10,7 @@ require_login();
 require_once 'database-dota.php';
 $conn = db_connect();
 
+$title_tag = "404 Page";
 include_once 'sharedmy/top.php';
 
 ?>

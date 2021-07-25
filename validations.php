@@ -14,6 +14,31 @@ function require_login()
     }
 }
 
+function validate_game($game){
+    $errors = [];
+    // check if all inputs are valid
+    
+    if (empty($player)) {
+        $errors['player'] = "Please enter a player";
+    } else if(strlen($player) > 50){
+        $errors['player'] = "Player name only has 50 characters";
+    }
+
+    if (empty($comments)) {
+        $errors['comments'] = "Please enter a comment";
+    }
+
+    //level validation
+    $level_regex = "/([1-9]|[1-9][0-9]|100)/";
+    $level = $game['level'];
+
+    if ($level < 0 || $level > 100 || !preg_match($level_regex, $level))
+    {
+        $errors['level'] = "Please enter a valid level between 1-100";
+    }
+    return $errors;
+}
+
 function validate_registration($user, $conn){
     $errors = [];
 

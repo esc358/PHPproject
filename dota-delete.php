@@ -10,7 +10,7 @@ require_login();
 require_once 'database-dota.php';
 $conn = db_connect();
 
-
+$title_tag = "Delete Player";
 //IF this page is fetched via a GET
 // then display record with confirmation button
 
