@@ -1,2 +1,7 @@
 ErrorDocument 404 https://lamp.computerstudi.es/~Emilio200478144/php-term2/week09/myproject/404.php
 
+ErrorDocument 404 https://lamp.computerstudi.es/~Emilio200478144/php-term2/week09/myproject/404.php
+
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule (.*) https://lamp.computerstudi.es%{REQUEST_URI}
