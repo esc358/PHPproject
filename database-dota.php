@@ -10,6 +10,7 @@ function db_queryAll($sql, $conn) {
         $run = $cmd->fetchAll();
         return $run;
     }catch (Exception $e) {
+        //mail('emilio.condeludena@mygeorgian.ca', 'PDO Error', $e); this line will send and email if an error is found
         header("Location: error.php");
     }
 }
