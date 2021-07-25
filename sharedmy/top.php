@@ -42,9 +42,13 @@
                         </ul>
                         <ul class="navbar-nav d-flex">
                             <?php if (is_logged_in()) { ?>
-                                <li class="nav-item">
-                                    <a class="btn btn-danger btn-lg" href="logout.php">Logout <i
-                                            class="bi bi-box-arrow-right"></i></a>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-person-circle"></i> <?= $_SESSION['username']; ?>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="logout.php">Logout <i class="bi bi-box-arrow-right"></i></a></li>
+                                </ul>
                                 </li>
                             <?php } else { ?>
                                 <li class="nav-item">
