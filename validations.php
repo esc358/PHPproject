@@ -14,7 +14,7 @@ function require_login()
     }
 }
 
-function validate_game($game){
+function validate_game($game){ //function to catch user input errors
     $errors = [];
     // check if all inputs are valid
     
