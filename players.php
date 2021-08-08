@@ -42,16 +42,16 @@ if(!empty($keywords))
 $players = db_queryAll($sql, $conn, $word_list);
 ?>
 
-<table class="table table-secondary table-striped table-bordered border-secondary fs-5 mt-4">
+<table class="sortable table table-secondary table-striped table-bordered border-secondary fs-5 mt-4">
     <thead>
         <tr>
             <th scope="col">Player</th>
             <th scope="col">Level</th>
             <th scope="col">Ability</th>
-            <th scope="col">Comments</th>
+            <th scope="col" class="sorttable_nosort">Comments</th>
             <?php if (is_logged_in()) { ?>
-                <th scope="col" class="col-1">Edit</th>
-                <th scope="col" class="col-1">Delete</th>
+                <th scope="col" class="col-1 sorttable_nosort">Edit</th>
+                <th scope="col" class="col-1 sorttable_nosort">Delete</th>
             <?php } ?>
         </tr>
     </thead>
