@@ -67,6 +67,7 @@ if($_SERVER['REQUEST_METHOD']== 'POST'){
     $level = $dota['level'];
     $ability = $dota['ability'];
     $comments = $dota['comments'];
+    $photo = $dota['photo'];
 }
 
 ?>
@@ -117,6 +118,16 @@ if($_SERVER['REQUEST_METHOD']== 'POST'){
                 <input required class="<?= (isset($errors['comments']) ? 'is-invalid' : ''); ?> form-control form-control-lg" type="text" name="comments"
                     value="<?php echo $comments; ?>">
                 <p class="text-danger"><?= $errors['comments'] ?? ''; ?></p>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-3 mb-5">
+            <div class="card">
+                <img id="cover" src="<?php echo $photo; ?>" class="card-img-top" alt="game cover">
+                <div class="card-body">
+                    <input id="choosefile" type="file" name="pic" class="form-control">
+                </div>
+                <p class="px-3 pb-2 text-danger"><?= $errorsImage['pic'] ?? ''; ?></p>
             </div>
         </div>
 

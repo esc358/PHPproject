@@ -17,13 +17,14 @@ function require_login()
 function validate_game($game){ //function to catch user input errors
     $errors = [];
     // check if all inputs are valid
-    
+    $player = $game['player'];
     if (empty($player)) {
         $errors['player'] = "Please enter a player";
     } else if(strlen($player) > 50){
         $errors['player'] = "Player name only has 50 characters";
     }
 
+    $comments = $game['comments'];
     if (empty($comments)) {
         $errors['comments'] = "Please enter a comment";
     }
@@ -36,6 +37,25 @@ function validate_game($game){ //function to catch user input errors
     {
         $errors['level'] = "Please enter a valid level between 1-100";
     }
+    return $errors;
+}
+
+function validate_image($size, $type, $name){
+    $errors = [];
+     // check if all inputs are valid
+     if($size > 100000)
+     {
+         $errors['pic'] = "Img must be less than 1MB";
+     }
+     
+     if(!($type == 'image/jpeg' || $type == 'image/png'))
+     {
+         $errors['pic'] = "Image formate must be .jpeg or png.";
+     }
+     if(empty($name))
+     {
+         $errors['pic'] = "Image is empty";
+     }
     return $errors;
 }
 
