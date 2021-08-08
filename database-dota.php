@@ -2,11 +2,11 @@
 require_once 'db_cred.php';
 
 //create function for DRY
-function db_queryAll($sql, $conn) {
+function db_queryAll($sql, $conn, $word_list = []) {
     try{
         // run query and store results
         $cmd = $conn->prepare($sql);
-        $cmd -> execute();
+        $cmd -> execute($word_list);
         $run = $cmd->fetchAll();
         return $run;
     }catch (Exception $e) {

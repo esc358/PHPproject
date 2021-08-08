@@ -1,3 +1,11 @@
+<?php
+$keywords = "";
+if(isset($_GET['k']))
+{
+    $keywords = filter_var($_GET['k'], FILTER_SANITIZE_STRING);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,6 +52,12 @@
                                 </li>
                             <?php } ?>
                         </ul>
+
+                        <form class="d-flex pe-5 " action="players.php" method="GET">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="k" value="<?= $keywords?>">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+
                         <ul class="navbar-nav d-flex">
                             <?php if (is_logged_in()) { ?>
                                 <li class="nav-item dropdown">

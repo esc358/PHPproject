@@ -12,7 +12,34 @@ include_once 'sharedmy/top.php';
 
 //build a sql query
 $sql = "SELECT * FROM dota";
-$players = db_queryAll($sql, $conn);
+
+$word_list = array();
+if(!empty($keywords))
+{
+    $sql .= " WHERE ";
+
+    //split multiple keywords using php explode
+    $word_list = explode(" " , $keywords);
+
+    //loop through word list array ad each word word clause
+    foreach($word_list as $key => $word)
+    {
+        $word_list[$key] = "%" . $word . "%";
+
+        if($key == 0)
+        {
+            $sql .= " player Like ?";
+        }
+        else
+        {
+            //omit word or
+            $sql .= " OR player like ?";
+        }
+    }
+
+}
+
+$players = db_queryAll($sql, $conn, $word_list);
 ?>
 
 <table class="table table-secondary table-striped table-bordered border-secondary fs-5 mt-4">
