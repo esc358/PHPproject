@@ -57,7 +57,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         
             //execute the command
             $cmd -> execute();
-            header("Location: players.php");
+            header("Location: players.php?t=3&msg=Done");
             exit;
         }catch (Exception $e) {
             header("Location: error.php");

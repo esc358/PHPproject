@@ -47,7 +47,7 @@ if($_SERVER['REQUEST_METHOD']== 'POST'){
             //execute the command
             $cmd -> execute();
             // - redirect to games
-            header("location: players.php");
+            header("location: players.php?t=2&msg=Done");
             exit;
         }catch (Exception $e) {
             header("Location: error.php");
@@ -123,7 +123,7 @@ if($_SERVER['REQUEST_METHOD']== 'POST'){
 
         <div class="col-12 col-sm-3 mb-5">
             <div class="card">
-                <img id="cover" src="<?php echo $photo; ?>" class="card-img-top" alt="game cover">
+                <img id="cover" src="" class="card-img-top" alt="game cover">
                 <div class="card-body">
                     <input id="choosefile" type="file" name="pic" class="form-control">
                 </div>

@@ -89,3 +89,17 @@ function validate_registration($user, $conn){
         }
     return $errors;
 }
+
+
+function display_toast($t, $msg)
+{
+    if(!($t && $msg) || $t>4)
+    {
+        return;
+    }
+    $msgs = [];
+    $msgs ['3'] = "Successfuly Added";
+    $msgs ['1'] = "Successfuly Deleted";
+    $msgs ['2'] = "Successfuly Edited";
+    return;
+}

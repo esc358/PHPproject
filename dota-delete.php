@@ -77,12 +77,12 @@ if($_SERVER['REQUEST_METHOD']== 'GET'){
     try{
         $id = filter_var($_GET['dota_id'], FILTER_SANITIZE_NUMBER_INT);
 
-        $sql = "DELETE FROM dotaa WHERE dota_id=" . $id;
+        $sql = "DELETE FROM dota WHERE dota_id=" . $id;
 
         $cmd = $conn->prepare($sql);
         $cmd -> execute();
 
-        header("location: players.php");
+        header("location: players.php?t=1&msg=Done");
     }catch (Exception $e) {
         header("location: error.php");
     }

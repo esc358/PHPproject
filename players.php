@@ -76,5 +76,27 @@ $players = db_queryAll($sql, $conn, $word_list);
 
 
 <?php
+$t ="";
+$msgs = [];
+if(isset($t))
+{
+$t = filter_var($_GET['t'] ?? '', FILTER_SANITIZE_STRING);
+$msg = filter_var($_GET['msg'] ?? '', FILTER_SANITIZE_STRING);
+
+}
+
 include_once 'sharedmy/footer.php';
 ?>
+
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header bg-dark text-light">
+
+            <strong class="me-auto"><?php display_toast($t, $msg);?></strong>
+            <small>11 mins ago</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body bg-dark text-light">
+            <?=$msg;?>
+        </div>
+    </div>
