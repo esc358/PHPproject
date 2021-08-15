@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Players</title>
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+
+</head>
+<body>
+    <main id="main" class="mw6 center">
+        
+    </main>
+
+    <script>
+        let games = [];
+        async function getjson()
+        {
+            const res = await fetch('https://lamp.computerstudi.es/~Emilio200478144/php-term2/week12/myproject/api/getplayers.php')
+            const data = await res.json();
+            //console.log(data))
+            games = data
+            display ();
+        }
+
+        function display()
+        {
+            main.innerHTML = games.map(game => `
+                
+                <article class="dt w-100 bb b--black-05 pb2 mt2" href="#0">
+                    <div class="dtc w2 w3-ns v-mid">
+                        <img src="" class="ba b--black-10 db br2 w2 w3-ns h2 h3-ns"/>
+                    </div>
+                    <div class="dtc v-mid pl3">
+                        <h1 class="f6 f5-ns fw6 lh-title black mv0">${game.player} </h1>
+                        <h2 class="f6 fw4 mt0 mb0 black-60">${game.level}</h2>
+                    </div>
+                    <div class="dtc v-mid">
+                        <form class="w-100 tr">
+                        <a href = "" class="f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60" type="submit">${game.ability}</a>
+                        </form>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        getjson();   
+
+    </script>
+    
+</body>
+</html>

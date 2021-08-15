@@ -50,6 +50,11 @@ if(isset($_GET['k']))
                                 <li class="nav-item">
                                     <a class="nav-link" href="dota.php">Add Game</a>
                                 </li>
+                                <li class="nav-item">
+                                <a class="nav-link" href="store.php">Store</a>
+                            </li>
+
+
                             <?php } ?>
                         </ul>
 
