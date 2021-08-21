@@ -2,7 +2,7 @@
 
 Here's my demo - https://www.loom.com/share/e26318bf4de64e6e8f1c1c562c395d1e
 
-![Screenshot of my project](https://dummyimage.com/500x300)
+
 
 ## Purpose of Website
 
